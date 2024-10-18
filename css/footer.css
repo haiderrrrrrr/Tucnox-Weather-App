@@ -1,0 +1,123 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: grid;
+  grid-template-rows: 1fr 10rem auto;
+  grid-template-areas: "main" "." "footer";
+  overflow-x: hidden;
+  background: #f5f7fa;
+  min-height: 100vh;
+  font-family: "Raleway", sans-serif;
+}
+
+/* Footer area styling */
+.footer {
+  z-index: 1;
+  height: 250px;
+  --footer-background: #1c1c1c;
+  display: grid;
+  position: relative;
+  grid-area: footer;
+  width: 100vw;
+}
+
+/* Bubbles container and bubble animations */
+.bubbles {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2rem;
+  background: var(--footer-background);
+  filter: url("#blob");
+}
+
+.bubble {
+  position: absolute;
+  left: var(--position, 50%);
+  background: var(--footer-background);
+  border-radius: 100%;
+  animation: bubble-size var(--time, 4s) ease-in infinite var(--delay, 0s),
+    bubble-move var(--time, 4s) ease-in infinite var(--delay, 0s);
+  transform: translate(-50%, 100%);
+}
+
+/* Content inside the footer */
+.content {
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-gap: 4rem;
+  padding: 2rem;
+  background: var(--footer-background);
+}
+
+/* Text colors */
+.content a,
+.content p {
+  color: #f5f7fa;
+  text-decoration: none;
+}
+
+.content b {
+  margin-left: 90px;
+  font-size: 23px;
+  margin-right: 220px;
+  color: #949494;
+}
+
+.content p {
+  font-size: 1.25rem;
+  color: #f5f7fa;
+}
+
+/* Div arrangement and image alignment */
+.content > div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.content > div > div {
+  margin: 0.25rem 0;
+}
+
+.content > div > div > * {
+  margin-right: 0.5rem;
+}
+
+.image {
+  align-self: center;
+  width: 4rem;
+  height: 4rem;
+  margin: 0.25rem 0;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Bubble size animation */
+@keyframes bubble-size {
+  0%,
+  75% {
+    width: var(--size, 4rem);
+    height: var(--size, 4rem);
+  }
+  100% {
+    width: 0rem;
+    height: 0rem;
+  }
+}
+
+/* Bubble movement animation */
+@keyframes bubble-move {
+  0% {
+    bottom: -4rem;
+  }
+  100% {
+    bottom: var(--distance, 10rem);
+  }
+}

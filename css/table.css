@@ -1,0 +1,117 @@
+/* Table for Forecast Styling */
+.table-container {
+  margin: -560px auto 0 auto;
+  padding: 0;
+  max-width: 1200px;
+  margin-left: 175px;
+  width: calc(100% - 175px); /* Ensures the container takes the correct width */
+  min-width: 1200px; /* Prevents the container from shrinking too much */
+}
+
+/* Table */
+.fore {
+  color: #575756;
+}
+
+table {
+  width: 100%; /* Make sure the table takes up all available width */
+  border-collapse: collapse;
+  border-radius: 10px;
+  overflow: hidden;
+  margin-top: 20px;
+}
+
+th,
+td {
+  padding: 10px;
+  text-align: center;
+  vertical-align: middle;
+  border: 1px solid #ddd;
+  color: #575756;
+}
+
+th {
+  background-color: #1cb0f6;
+  color: whitesmoke;
+  font-weight: bold;
+  width: 150px; /* Adjust or remove this if it's affecting the table width */
+  height: 70px;
+}
+
+td {
+  background-color: #f9f9f9;
+  transition: background-color 0.3s ease;
+  color: #575756;
+}
+
+/* Normal background for even rows */
+tr:nth-child(odd) td {
+  background-color: #f9f9f9;
+}
+
+/* Grey background for odd rows */
+tr:nth-child(even) td {
+  background-color: #e0e0e0;
+}
+
+#pagination {
+  margin-top: 20px;
+  text-align: center;
+}
+
+button {
+  padding: 8px 15px;
+  margin: 0 5px;
+  background-color: #1cb0f6;
+  color: whitesmoke;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  outline: none;
+  box-shadow: none;
+}
+
+button:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+button:hover {
+  background-color: #1ca1e0;
+}
+
+button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+/* Ionicons Styling for Table */
+th i {
+  color: whitesmoke;
+  font-size: 22px;
+  margin-right: 8px;
+  vertical-align: middle;
+  text-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
+}
+
+th i.bordered {
+  padding: 6px;
+  border-radius: 50%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Error message styling */
+.error-message {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #ff4d4d;
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  font-size: 1rem;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 1000;
+}
