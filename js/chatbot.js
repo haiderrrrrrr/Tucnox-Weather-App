@@ -13,7 +13,7 @@ const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1/models/gemi
 
 // OpenWeather API configuration
 const WEATHER_API_KEY = "b91f6a85871abbb4a82078d84ccdca11";
-const WEATHER_API_URL = "http://api.openweathermap.org/data/2.5/forecast";
+const WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/forecast";
 
 // Helper function to create chat messages
 const createChatLi = (message, className) => {
