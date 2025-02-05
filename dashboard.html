@@ -17,6 +17,9 @@
       type="module"
       src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"
     ></script>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
     <script
       nomodule
       src="https://cdn.jsdelivr.net/npm/ionicons@5.5.2/dist/ionicons/ionicons.js"
@@ -141,17 +144,19 @@
             <div
               class="weather__status d-flex flex-row justify-content-center align-items-center mt-3"
             >
-              <div class="p-4 d-flex justify-content-center align-items-center">
-                <img src="https://svgur.com/i/oHw.svg" alt="Humidity" />
-                <span id="humidity">--%</span>
-              </div>
-              <div class="p-4 d-flex justify-content-center align-items-center">
-                <img src="https://svgur.com/i/oH_.svg" alt="Pressure" />
-                <span id="pressure">-- mB</span>
-              </div>
-              <div class="p-4 d-flex justify-content-center align-items-center">
-                <img src="https://svgur.com/i/oKS.svg" alt="Wind Speed" />
-                <span id="wind-speed">-- km/h</span>
+            <div class="p-4 d-flex justify-content-center align-items-center">
+              <i class="fas fa-tint"></i>
+              <span id="humidity">--%</span>
+            </div>
+            <div class="p-4 d-flex justify-content-center align-items-center">
+              <i class="fas fa-tachometer-alt"></i>
+              <span id="pressure">-- mB</span>
+            </div>
+            <div class="p-4 d-flex justify-content-center align-items-center">
+              <i class="fas fa-wind"></i>
+              <span id="wind-speed">-- km/h</span>
+            </div>
+            
               </div>
             </div>
           </div>
