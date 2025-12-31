@@ -1,4 +1,8 @@
-const apiKey = "b91f6a85871abbb4a82078d84ccdca11";
+// Read OpenWeather API key from runtime ENV loaded by js/env.js
+function getWeatherApiKey() {
+  const env = window.ENV || {};
+  return env.OPENWEATHER_API_KEY || env.WEATHER_API_KEY || "";
+}
 let lastFetchedCity = "";
 let isFahrenheit = JSON.parse(localStorage.getItem("isFahrenheit")) || false; // For Tracking the unit (false = Celsius, true = Fahrenheit)
 let barChartInstance, // For making Charts Instances
@@ -73,6 +77,13 @@ function fetchWeather(city) {
   const unitSymbol = isFahrenheit ? "&deg;F" : "&deg;C";
   $("#loader").show();
 
+  const apiKey = getWeatherApiKey();
+  if (!apiKey) {
+    $("#loader").hide();
+    showError("OpenWeather API key is not configured.");
+    return;
+  }
+
   $.ajax({
     url: `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=${units}`,
     method: "GET",
@@ -141,6 +152,12 @@ function fetchForecast(city) {
   const units = isFahrenheit ? "imperial" : "metric";
   const unitSymbol = isFahrenheit ? "&deg;F" : "&deg;C";
 
+  const apiKey = getWeatherApiKey();
+  if (!apiKey) {
+    showError("OpenWeather API key is not configured.");
+    return;
+  }
+
   $.ajax({
     url: `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=${units}`,
     method: "GET",
@@ -179,6 +196,12 @@ function fetchForecast(city) {
 function fetchForecastcard(city) {
   const units = isFahrenheit ? "imperial" : "metric";
   const unitSymbol = isFahrenheit ? "&deg;F" : "&deg;C";
+
+  const apiKey = getWeatherApiKey();
+  if (!apiKey) {
+    showError("OpenWeather API key is not configured.");
+    return;
+  }
 
   $.ajax({
     url: `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=${units}`,
@@ -549,7 +572,7 @@ $(document).ready(function () {
         $("#loader").show();
 
         $.ajax({
-          url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`,
+          url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${getWeatherApiKey()}&units=${units}`,
           method: "GET",
           success: function (data) {
             fetchWeather(data.name);
@@ -639,7 +662,7 @@ $("#default-location").on("click", function () {
         $("#loader").show();
 
         $.ajax({
-          url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}&units=${units}`,
+          url: `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${getWeatherApiKey()}&units=${units}`,
           method: "GET",
           success: function (data) {
             $("#city-input").val(data.name);

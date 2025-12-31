@@ -7,13 +7,25 @@ const sendChatBtn = document.querySelector(".chat-input span");
 let userMessage = null;
 const inputInitHeight = chatInput.scrollHeight;
 
-// Gemini API configuration
-const GEMINI_API_KEY = "AIzaSyBjQuSCqxbIut7f7r1sOlIW4-GPTbbH7O0";
-const GEMINI_API_URL = `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${GEMINI_API_KEY}`;
-
-// OpenWeather API configuration
-const WEATHER_API_KEY = "b91f6a85871abbb4a82078d84ccdca11";
+// API configuration (keys loaded from runtime ENV via js/env.js)
 const WEATHER_API_URL = "https://api.openweathermap.org/data/2.5/forecast";
+
+function getWeatherApiKey() {
+  const env = window.ENV || {};
+  return env.OPENWEATHER_API_KEY || env.WEATHER_API_KEY || "";
+}
+
+function getGeminiApiKey() {
+  const env = window.ENV || {};
+  return env.GEMINI_API_KEY || "";
+}
+
+function getGeminiUrl() {
+  const key = getGeminiApiKey();
+  return key
+    ? `https://generativelanguage.googleapis.com/v1/models/gemini-pro:generateContent?key=${key}`
+    : "";
+}
 
 // Helper function to create chat messages
 const createChatLi = (message, className) => {
@@ -35,8 +47,10 @@ const convertToCelsius = (tempFahrenheit) => ((tempFahrenheit - 32) * 5) / 9;
 // Function to fetch weather data from OpenWeather API
 const fetchWeatherData = async (city) => {
   try {
+    const key = getWeatherApiKey();
+    if (!key) return null;
     const response = await fetch(
-      `${WEATHER_API_URL}?q=${city}&appid=${WEATHER_API_KEY}&units=metric`
+      `${WEATHER_API_URL}?q=${city}&appid=${key}&units=metric`
     );
     const data = await response.json();
 
@@ -145,8 +159,15 @@ const generateResponse = async (chatElement) => {
     }),
   };
 
-  // Sending POST request to Gemini API and getting respons
+  // Sending POST request to Gemini API and getting response
   try {
+    const GEMINI_API_URL = getGeminiUrl();
+    if (!GEMINI_API_URL) {
+      messageElement.classList.add("error");
+      messageElement.textContent = "Gemini API key is not configured.";
+      chatbox.scrollTo(0, chatbox.scrollHeight);
+      return;
+    }
     const response = await fetch(GEMINI_API_URL, requestOptions);
     const data = await response.json();
     if (!response.ok) throw new Error(data.error.message);
